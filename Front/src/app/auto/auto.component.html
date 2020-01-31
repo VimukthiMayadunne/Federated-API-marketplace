@@ -1,0 +1,47 @@
+<br>
+<br>
+<table align="center">
+    <tr>
+        <th colspan="2">
+            <h3>Genarating The Acsses token</h3>
+        </th>
+    </tr>
+    <tr>
+        <td>Available Grant Types</td>
+        <td>
+            <ul *ngFor="let item of head">
+                <li>{{item}}</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <th colspan="2">Genarate The key Via - {{gType.value}}</th>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <form (ngSubmit)="onSubmit(csForm.value)" [formGroup]="csForm" class="cs-form">
+                <mat-form-field>
+                    <mat-select placeholder="Please Select the Grant Type" formControlName="gType" #gType>
+                        <div *ngFor="let i of head">
+                            <mat-option value={{i}}>{{i}}</mat-option>
+                        </div>
+                    </mat-select>
+                </mat-form-field>
+                <button mat-fab color="accent" (click)="selectForm(gType.value)" type="button">Display</button>
+                <div *ngIf="display">
+                    <div *ngFor="let n of grantForm">
+                        <mat-form-field class="field-full-width">
+                            <input type="password"   formControlName={{n}} #{{n}} matInput placeholder={{n}}><br>
+                        </mat-form-field>
+                    </div>
+                    <button mat-raised-button color="primary" type="submit">Get Token</button>
+                    <button mat-raised-button color="accent" type="reset">Clear</button>
+                </div>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <th>API Key</th>
+        <td>{{token}}</td>
+    </tr>
+</table>
